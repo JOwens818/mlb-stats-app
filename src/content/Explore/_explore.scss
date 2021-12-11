@@ -1,0 +1,16 @@
+@import './mixins.scss';
+@import './overrides.scss';
+
+.back {
+    background-color: #161616;
+}
+
+
+.landing-page__tab-content {
+    padding-top: $layout-05;
+    padding-bottom: $layout-05;
+  }
+
+.landing-page__r2 {
+    margin-top: 5rem;
+}

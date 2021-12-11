@@ -1,0 +1,9 @@
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/type/scss/font-family.scss';
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/layout/scss/breakpoint.scss';
+@import 'carbon-components/scss/globals/scss/typography.scss';
+@import 'carbon-components/scss/globals/scss/vars.scss';
+@import '@carbon/charts/styles/styles-g100.scss';
+
+@import './components/Header/header.scss';
+@import './content/LandingPage/landing-page.scss';
+@import './content/Explore/explore.scss';
