@@ -8,9 +8,21 @@
 
 .landing-page__tab-content {
     padding-top: $layout-05;
-    padding-bottom: $layout-05;
+    //padding-bottom: $layout-05;
   }
 
 .landing-page__r2 {
     margin-top: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.header {
+    //padding-left: 6rem;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.structured-list {
+    padding-top: 1rem;
 }

@@ -12,7 +12,7 @@ const MLBHistogram = (props) => {
         "bottom": {
           "title": props.field,
           "mapsTo": "value",
-          "bins": 40,
+          "bins": 60,
           "limitDomainToBins": true
         },
         "left": {

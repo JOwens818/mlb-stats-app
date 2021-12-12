@@ -10,4 +10,14 @@ async function getHistogramData(field) {
     return resp.json();
 }
 
-export { getHistogramData };
+
+async function getHistogramStats(field) {
+    let url = ENDPOINT + "histogram-stats?field=" + field;
+    let resp = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
+export { getHistogramData, getHistogramStats };
