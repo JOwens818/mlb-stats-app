@@ -1,34 +1,28 @@
 import React from 'react';
-import{HistogramChart} from '@carbon/charts-react';
+import{ScatterChart} from '@carbon/charts-react';
 import {Loading} from 'carbon-components-react';
 
-const MLBHistogram = (props) => {
 
+const MLBScatter = (props) => {
 
   const getOptions = () => {
     
     return {
       "axes": {
         "bottom": {
-          "title": props.field,
-          "mapsTo": "value",
-          "bins": 60,
-          "limitDomainToBins": true
+          "title": "xwOBA",
+          "mapsTo": "xwoba",
+          "scaleType": "linear"
         },
         "left": {
-          "title": "Count",
-          "scaleType": "linear",
-          "binned": true
+          "title": props.field,
+          "mapsTo": "selectedField",
+          "scaleType": "linear"
         }
       },
       "legend": {
         "alignment": "center",
         "enabled": false
-      },
-      "color": {
-        "scale": {
-          "histdata": "#0f62fe"
-        }
       },
       "height": "400px"
     }
@@ -43,12 +37,12 @@ const MLBHistogram = (props) => {
   }
 
   return (
-    <HistogramChart 
+    <ScatterChart 
       data={props.data}
-      options={getOptions()}>
-    </HistogramChart>
+      options={getOptions()}
+    />
   );
 
 };
 
-export default MLBHistogram;
+export default MLBScatter;

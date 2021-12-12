@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import MLBHistogram from '../../charts/Histogram/Histogram.js';
-import {getHistogramData, getHistogramStats} from '../../services/statservice.js';
+import MLBScatter from '../../charts/Scatter/Scatter.js';
+import {getHistogramData, getHistogramStats, getScatterData} from '../../services/statservice.js';
 import {
   Tab,
   Tabs,
@@ -20,7 +21,10 @@ const ExploreData = () => {
   const [histLoading, setHistLoading] = useState(false);
   const [histFirstRun, setHistFirstRun] = useState(true);
   const [histField, setHistField] = useState("");
-
+  const [scatterData, setScatterData] = useState([]);
+  const [scatterLoading, setScatterLoading] = useState(false);
+  const [scatterFirstRun, setScatterFirstRun] = useState(true);
+  const [scatterField, setScatterField] = useState("");
 
 
   const getHistData = async (field) => {
@@ -30,12 +34,17 @@ const ExploreData = () => {
     let hist_stats = await getHistogramStats(field);
     setHistData(hist_data);
     setHistStats(hist_stats);
-    console.log(hist_data);
-    console.log(hist_stats);
     setHistLoading(false);
-    
   }
 
+
+  const getScatData = async (field) => {
+    setScatterLoading(true);
+    setScatterFirstRun(false);
+    let scat_data = await getScatterData(field);
+    setScatterData(scat_data);
+    setScatterLoading(false);
+  }
 
 
   const onHistSelectChange = e => {
@@ -43,6 +52,20 @@ const ExploreData = () => {
     getHistData(e.target.value);
   }
 
+
+  const onScatterSelectChange = e => {
+    setScatterField(e.target.value);
+    getScatData(e.target.value);
+  }
+
+
+  const onTabSelect = () => {
+      setScatterFirstRun(true);
+      setScatterData([]);
+      setHistFirstRun(true);
+      setHistData([]);
+    
+  }
 
 
   const histSelectChildren = [
@@ -80,7 +103,7 @@ const ExploreData = () => {
       <div className='bx--row landing-page__r2'>
         <div className="bx--col bx--no-gutter">
           
-          <Tabs {...props.tabs} aria-label="Tab navigation">
+          <Tabs {...props.tabs} onSelectionChange={onTabSelect} aria-label="Tab navigation">
             <Tab {...props.tab} label="Univariate">
               <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
                 <div className="bx--row landing-page__tab-content">
@@ -140,16 +163,32 @@ const ExploreData = () => {
               </div>
             </Tab>
             <Tab {...props.tab} label="Multivariate">
-              <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+            <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
                 <div className="bx--row landing-page__tab-content">
-   
+          
+                  <div className='bx--col-lg-4'>
+                    <Select id="scatterSelect" 
+                      labelText="Select Feature"
+                      defaultValue="def"
+                      children = {histSelectChildren}
+                      onChange = {onScatterSelectChange}
+                    />
+                  </div>
+                  <div className='bx--col-lg-12 header'>
+                    <h4>Explore the correlation between selected feature and xwOBA</h4>
+                  </div>
+
                 </div>
-              </div>
-            </Tab>
-            <Tab {...props.tab} label="Correlation">
-              <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
-                <div className="bx--row landing-page__tab-content">
-     
+                <div className="bx--row">
+
+                  <div className='bx--col-lg-12 bx--offset-lg-4'>
+                    <MLBScatter 
+                      data={scatterData}
+                      loading={scatterLoading}
+                      firstRun={scatterFirstRun}
+                      field={scatterField}
+                    />
+                  </div>
                 </div>
               </div>
             </Tab>

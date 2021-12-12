@@ -20,4 +20,14 @@ async function getHistogramStats(field) {
     return resp.json();
 }
 
-export { getHistogramData, getHistogramStats };
+
+async function getScatterData(field) {
+    let url = ENDPOINT + "scatter?field=" + field;
+    let resp = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
+export { getHistogramData, getHistogramStats, getScatterData };
