@@ -60,10 +60,10 @@ const ExploreData = () => {
 
 
   const onTabSelect = () => {
-      setScatterFirstRun(true);
+/*       setScatterFirstRun(true);
       setScatterData([]);
       setHistFirstRun(true);
-      setHistData([]);
+      setHistData([]); */
     
   }
 

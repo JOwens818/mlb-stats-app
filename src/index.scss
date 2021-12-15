@@ -17,7 +17,10 @@ $carbon--theme: $carbon--theme--g100;
 
 // Carbon components
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
+@import 'carbon-components/scss/components/data-table/data-table';
+@import 'carbon-components/scss/components/pagination/pagination';
 @import '@carbon/ibmdotcom-styles/scss/components/leadspace/leadspace';
+
 
 
 

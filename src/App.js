@@ -5,6 +5,7 @@ import {Content} from 'carbon-components-react';
 import MLBHeader from './components/Header/Header';
 import LandingPage from './content/LandingPage';
 import ExploreData from './content/Explore/Explore';
+import PlayerPredictions from './content/Prediction/Prediction';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/explore" component={ExploreData} />
+            <Route exact path="/predictions" component={PlayerPredictions} />
           </Switch>
         </Content>
     </>

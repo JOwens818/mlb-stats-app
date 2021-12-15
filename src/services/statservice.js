@@ -30,4 +30,16 @@ async function getScatterData(field) {
     return resp.json();
 }
 
-export { getHistogramData, getHistogramStats, getScatterData };
+
+async function getPredictedStatsAll() {
+    let url = ENDPOINT + "predicted-stats-all";
+    let resp = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
+
+
+export { getHistogramData, getHistogramStats, getScatterData, getPredictedStatsAll };

@@ -14,7 +14,7 @@ const MLBHeader = () => (
     <HeaderName element={Link} to="/" prefix="AMS">MLB Stat Predictor</HeaderName>
     <HeaderNavigation aria-label="">
       <HeaderMenuItem element={Link} to="/explore">Explore Data</HeaderMenuItem>
-      <HeaderMenuItem element={Link} to="/">View Predictions</HeaderMenuItem>
+      <HeaderMenuItem element={Link} to="/predictions">View Predictions</HeaderMenuItem>
       <HeaderMenuItem element={Link} to="/">Model Tuning</HeaderMenuItem>
     </HeaderNavigation>
   </Header>
