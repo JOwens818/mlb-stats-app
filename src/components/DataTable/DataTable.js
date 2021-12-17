@@ -20,16 +20,20 @@ import {
   TableToolbarSearch,
   TableToolbarAction,
   TableToolbarMenu,
-  Button
+  Button,
+  OverflowMenu,
+  OverflowMenuItem
 } from 'carbon-components-react';
-import { Delete16 as Delete } from '@carbon/icons-react';
-import { Save16 as Save } from '@carbon/icons-react';
+
 
 
 const MLBDataTable = (props) => {
 
-    const [firstRowIndex, setFirstRowIndex] = useState(0);
-    const [currentPageSize, setCurrentPageSize] = useState(25);
+
+  const viewPlayerProfile = (event) => {
+    console.log(event.target.parentNode.id);
+    props.sendPlayerID(event.target.parentNode.id);
+  }
 
 
     if (typeof props.tblHeaders === 'undefined' || typeof props.tblRows === 'undefined' || props.loading === true)
@@ -40,84 +44,60 @@ const MLBDataTable = (props) => {
         <div className='topMargin'>
           <DataTable
             useZebraStyles={true}
-            rows={
-              props.tblRows.slice(
-                  firstRowIndex,
-                  firstRowIndex + currentPageSize
-              )}
+            rows={props.tblRows}
+            overflowMenuOnHover={true}
             headers={props.tblHeaders} isSortable>
 
               {({ rows, headers, getHeaderProps, getRowProps,
-                getTableProps, getSelectionProps, getToolbarProps,
-                getBatchActionProps, selectedRows, batchActionClick }) => (
+                getTableProps, onInputChange, getToolbarProps }) => (
               <TableContainer >
-                <TableToolbar {...getToolbarProps()}>
-                  <TableBatchActions {...getBatchActionProps()}>
-                    <TableBatchAction
-                      tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-                      renderIcon={Delete}
-                      //onClick={batchActionClick(selectedRows)}
-                      >
-                      Delete
-                    </TableBatchAction>
-                    <TableBatchAction
-                      tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-                      renderIcon={Save}
-                      //onClick={batchActionClick(selectedRows)}
-                      >
-                      Update
-                    </TableBatchAction>
-                  </TableBatchActions>
-                  <TableToolbarContent
-                    aria-hidden={getBatchActionProps().shouldShowBatchActions}>
-                    <TableToolbarSearch
-                      persistent="true"
-                      tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
-                      //onChange={onInputChange}
-                    />
-                    <TableToolbarMenu
-                      tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}>
-                      <TableToolbarAction onClick={() => alert('Exporting to CSV')}>
-                        Export to CSV
-                      </TableToolbarAction>
-                      <TableToolbarAction onClick={() => alert('Exporting to XLSX')}>
-                        Export to XLSX
-                      </TableToolbarAction>
-                    </TableToolbarMenu>
-                    <Button
-                      tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
-                      onClick={() => alert('Create new record modal')}
-                      size="small"
-                      kind="primary">
-                      Create Record
-                    </Button>
-                  </TableToolbarContent>
-                </TableToolbar>
+                
+                  {
+                    !props.profileMode &&
+                    <TableToolbar {...getToolbarProps()}>
+                      <TableToolbarContent>
+                        <TableToolbarSearch
+                          onChange={onInputChange}
+                        />
+                      </TableToolbarContent>
+                    </TableToolbar>
+                  }
+                  
                 <Table {...getTableProps()}>
                   <TableHead>
                       <TableRow>
-                        <TableSelectAll {...getSelectionProps()} />
                         {headers.map((header) => (
                             <TableHeader key={header.key} {...getHeaderProps({ header })}>
                                 {header.header}
                             </TableHeader>
                         ))}
+                        <TableHeader>
+
+                        </TableHeader>
                       </TableRow>
                   </TableHead>
                   <TableBody>
                       {rows.map((row) => (
-                      <TableRow key={row.id} {...getRowProps({ row })}>
-                        <TableSelectRow
-                          {...getSelectionProps({ row })}
-/*                             onSelect={(evt) => {
-                            action('TableSelectRow onSelect')(evt);
-                            getSelectionProps({ row }).onSelect(evt);
-                          }} */
-                        />
- 
+                      <TableRow key={row.id} {...getRowProps({ row })}
+                        onClick={(e) => {
+                          row.isSelected = true;
+                        }}
+                      >
                         {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
+                        <TableCell>
+                          {
+                            !props.profileMode &&
+                            <OverflowMenu flipped>
+                              <OverflowMenuItem 
+                                id={row.id}
+                                itemText="View Player Profile" 
+                                onClick={viewPlayerProfile}
+                              />
+                            </OverflowMenu>
+                          }
+                        </TableCell>
                       </TableRow>
                       ))}
                   </TableBody>
@@ -125,20 +105,6 @@ const MLBDataTable = (props) => {
               </TableContainer>
               )}
           </DataTable>
-          <Pagination
-              totalItems={props.tblRows.length}
-              backwardText="Previous page"
-              forwardText="Next page"
-              pageSize={currentPageSize}
-              pageSizes={[10, 25, 50, 100]}
-              itemsPerPageText="Items per page"
-              onChange={({ page, pageSize }) => {
-                  if (pageSize !== currentPageSize) {
-                  setCurrentPageSize(pageSize);
-                  }
-                  setFirstRowIndex(pageSize * (page - 1));
-              }}
-              />  
         </div>
  
     );

@@ -6,6 +6,7 @@ import MLBHeader from './components/Header/Header';
 import LandingPage from './content/LandingPage';
 import ExploreData from './content/Explore/Explore';
 import PlayerPredictions from './content/Prediction/Prediction';
+import ModelSandbox from './content/Sandbox/Sandbox';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/explore" component={ExploreData} />
             <Route exact path="/predictions" component={PlayerPredictions} />
+            <Route exact path="/sandbox" component={ModelSandbox} />
           </Switch>
         </Content>
     </>

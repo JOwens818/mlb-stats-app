@@ -8,6 +8,7 @@
     "@carbon/ibmdotcom-react": "^1.29.0",
     "@carbon/ibmdotcom-styles": "^1.29.0",
     "@carbon/icons-react": "^10.44.0",
+    "@carbon/pictograms-react": "^11.20.0",
     "@carbon/themes": "^10.48.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

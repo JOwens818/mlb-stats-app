@@ -15,7 +15,7 @@ const MLBHeader = () => (
     <HeaderNavigation aria-label="">
       <HeaderMenuItem element={Link} to="/explore">Explore Data</HeaderMenuItem>
       <HeaderMenuItem element={Link} to="/predictions">View Predictions</HeaderMenuItem>
-      <HeaderMenuItem element={Link} to="/">Model Tuning</HeaderMenuItem>
+      <HeaderMenuItem element={Link} to="/sandbox">Model Sandbox</HeaderMenuItem>
     </HeaderNavigation>
   </Header>
 );
