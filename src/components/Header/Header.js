@@ -16,6 +16,7 @@ const MLBHeader = () => (
       <HeaderMenuItem element={Link} to="/explore">Explore Data</HeaderMenuItem>
       <HeaderMenuItem element={Link} to="/predictions">View Predictions</HeaderMenuItem>
       <HeaderMenuItem element={Link} to="/sandbox">Model Sandbox</HeaderMenuItem>
+      <HeaderMenuItem element={Link} to="/predict-now">Predict Now!</HeaderMenuItem>
     </HeaderNavigation>
   </Header>
 );

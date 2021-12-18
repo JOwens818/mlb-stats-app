@@ -76,7 +76,7 @@ const PlayerPredictions = () => {
           !profileMode && 
           <>
             <div className='bx--row landing-page__r2'>
-              <div className='bx--col-sm-4 bx--col-lg-8 cta-card'>
+              <div className='bx--col-sm-4 bx--col-lg-8'>
                 <PictogramItem 
                   heading="Predicted Data"
                   copy="Easily sort by any column or use the filter to search for your favorite player!"
@@ -85,7 +85,7 @@ const PlayerPredictions = () => {
                   }}
                 />
               </div>
-              <div className='bx--col-sm-4 bx--col-lg-8 cta-card'>
+              <div className='bx--col-sm-4 bx--col-lg-8'>
                 <PictogramItem 
                   heading="Dive Deep"
                   copy="View in-depth player analysis by choosing 'Player Profile' from the overflow menu"
@@ -135,6 +135,7 @@ const PlayerPredictions = () => {
                 <MLBRadar 
                   data={radarData}
                   loading={loading}
+                  playerName={playerName}
                 />
               </div>
               <div className='bx--col-lg-8'>

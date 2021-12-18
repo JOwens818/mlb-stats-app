@@ -22,6 +22,11 @@ const MLBRadar = (props) => {
         "alignment": "center",
         "enabled": false
       },
+      "color": {
+        "scale": {
+          [props.playerName]: "#f1c21b"
+        }
+      },
       "height": "400px"
     }
   }

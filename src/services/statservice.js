@@ -70,6 +70,53 @@ async function getPlayerData(playerID) {
 }
 
 
+async function getProdModelInfo() {
+    let url = ENDPOINT + "/prod-model-info";
+    let resp = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
+
+async function getSandboxResults(nest, subsample, maxDepth, learnRate, gamma, regAlpha, regLambda) {
+
+    let data = {
+        "model_type": "sandbox",
+        "year": "2022",
+        "n_estimators": nest,
+        "subsample": subsample,
+        "max_depth": maxDepth,
+        "learning_rate": learnRate,
+        "gamma": gamma,
+        "reg_alpha": regAlpha,
+        "reg_lambda": regLambda  
+    }
+
+    let url = ENDPOINT + "/create-xgb-model";
+    let resp = await fetch(url, {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'}),
+        body: JSON.stringify(data),
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
+
+async function getPrediction(data) {
+
+    let url = ENDPOINT + "/xgb-model-predict";
+    let resp = await fetch(url, {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json', 'Accept': 'application/json'}),
+        body: JSON.stringify(data),
+        mode: 'cors'
+    });
+    return resp.json();
+}
+
 
 export { 
     getHistogramData, 
@@ -78,5 +125,8 @@ export {
     getPredictedStatsAll, 
     getRadarData,
     getLineData,
-    getPlayerData
+    getPlayerData,
+    getProdModelInfo,
+    getSandboxResults,
+    getPrediction
 };

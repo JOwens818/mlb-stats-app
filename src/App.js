@@ -7,6 +7,7 @@ import LandingPage from './content/LandingPage';
 import ExploreData from './content/Explore/Explore';
 import PlayerPredictions from './content/Prediction/Prediction';
 import ModelSandbox from './content/Sandbox/Sandbox';
+import RealTimePredict from './content/RealTimePred/RealTimePred';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/explore" component={ExploreData} />
             <Route exact path="/predictions" component={PlayerPredictions} />
             <Route exact path="/sandbox" component={ModelSandbox} />
+            <Route exact path="/predict-now" component={RealTimePredict} />
           </Switch>
         </Content>
     </>

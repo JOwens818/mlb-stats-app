@@ -31,7 +31,6 @@ const MLBDataTable = (props) => {
 
 
   const viewPlayerProfile = (event) => {
-    console.log(event.target.parentNode.id);
     props.sendPlayerID(event.target.parentNode.id);
   }
 
