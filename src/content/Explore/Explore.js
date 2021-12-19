@@ -25,6 +25,7 @@ const ExploreData = () => {
   const [scatterLoading, setScatterLoading] = useState(false);
   const [scatterFirstRun, setScatterFirstRun] = useState(true);
   const [scatterField, setScatterField] = useState("");
+  const [hasError, setHasError] = useState(false);
 
 
   const getHistData = async (field) => {
@@ -32,6 +33,8 @@ const ExploreData = () => {
     setHistFirstRun(false);
     let hist_data = await getHistogramData(field);
     let hist_stats = await getHistogramStats(field);
+    hasErrorInResponse(hist_data);
+    hasErrorInResponse(hist_stats);
     setHistData(hist_data);
     setHistStats(hist_stats);
     setHistLoading(false);
@@ -42,6 +45,7 @@ const ExploreData = () => {
     setScatterLoading(true);
     setScatterFirstRun(false);
     let scat_data = await getScatterData(field);
+    hasErrorInResponse(scat_data);
     setScatterData(scat_data);
     setScatterLoading(false);
   }
@@ -56,6 +60,13 @@ const ExploreData = () => {
   const onScatterSelectChange = e => {
     setScatterField(e.target.value);
     getScatData(e.target.value);
+  }
+
+
+  const hasErrorInResponse = (resp) => {
+    if (typeof resp === 'undefined' || 'errorMsg' in resp) {
+      setHasError(true);
+    }
   }
 
 
@@ -97,6 +108,14 @@ const ExploreData = () => {
     },
   };
 
+  if (hasError) {
+    return (
+      <div className='errorMsg'>
+        <h1>Oops... Something went wrong</h1>
+        <h4>Try refreshing the page or come back later</h4>
+      </div>
+    );
+  }
 
   return (
     <div className="bx--grid--full-width back">

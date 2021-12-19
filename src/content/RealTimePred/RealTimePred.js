@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {PictogramItem} from '@carbon/ibmdotcom-react';
-import {Research, Telecom} from '@carbon/pictograms-react';
+import {ListCheckbox, Telecom} from '@carbon/pictograms-react';
 import {TextInput, Button, Loading, Tile} from 'carbon-components-react';
 import { ArrowRight16 } from '@carbon/icons-react';
 import {getPrediction} from '../../services/statservice.js';
@@ -236,7 +236,7 @@ const RealTimePredict = () => {
 
   const getPredictedXWOBA = async () => {
     if (isDataInvalid()) {
-      alert("Please ensure all data is valid and complete");
+      alert("Please ensure all input data is valid and complete");
       return;
     }
 
@@ -284,17 +284,17 @@ const RealTimePredict = () => {
       <div className='bx--row landing-page__r2'>
         <div className='bx--col-sm-4 bx--col-lg-8'>
           <PictogramItem 
-            heading="Create New Models"
-            copy="Tune hyper parameters and compare your model's scores to production"
+            heading="Get Real Time Predictions"
+            copy="Enter values below to get a predicted xwOBA from our production model"
             pictogram={{
-              src: Research
+              src: ListCheckbox
             }}
           />
         </div>
         <div className='bx--col-sm-4 bx--col-lg-8'>
           <PictogramItem 
             heading="Coming Soon"
-            copy="Deploy your proposed model to the production environment!"
+            copy="Populate fields from actual player data!"
             pictogram={{
               src: Telecom
             }}

@@ -24,13 +24,13 @@ const ModelSandbox = () => {
   const [showSandboxResults, setShowSandboxResuts] = useState(false);
   const [sandboxLoading, setSandboxLoading] = useState(false);
 
-  const [nest, setNest] = useState(0);
-  const [subsamp, setSubsamp] = useState(0.0);
-  const [maxDepth, setMaxDepth] = useState(0);
-  const [learning, setLearning] = useState(0.0);
-  const [gamm, setGamm] = useState(0);
-  const [regAlpha, setRegAlpha] = useState(0);
-  const [regLambda, setRegLambda] = useState(0);
+  const [nest, setNest] = useState("");
+  const [subsamp, setSubsamp] = useState("");
+  const [maxDepth, setMaxDepth] = useState("");
+  const [learning, setLearning] = useState("");
+  const [gamm, setGamm] = useState("");
+  const [regAlpha, setRegAlpha] = useState("");
+  const [regLambda, setRegLambda] = useState("");
 
   const [nestInvalid, setNestInvalid] = useState(false);
   const [subsampInvalid, setSubsampInvalid] = useState(false);
@@ -107,9 +107,13 @@ const ModelSandbox = () => {
 
   const checkAllInputs = () => {
 
-    if(nestInvalid || subsampInvalid || maxDepthInvalid || 
-      learningInvalid || gammInvalid || regAlphaInvalid || 
-      regLambdaInvalid)
+    if(nestInvalid || nest === "" || 
+      subsampInvalid || subsamp === "" || 
+      maxDepthInvalid || maxDepth === "" || 
+      learningInvalid || learning === "" || 
+      gammInvalid || gamm === "" ||
+      regAlphaInvalid || regAlpha === "" || 
+      regLambdaInvalid || regLambda === "")
       return false;
     else
       return true;
@@ -126,7 +130,7 @@ const ModelSandbox = () => {
 
   const runSandboxModel = async () => {
     if (!checkAllInputs()) {
-      alert("Please validate your input values");
+      alert("Please ensure all input data is valid and complete");
       return;
     }
 
