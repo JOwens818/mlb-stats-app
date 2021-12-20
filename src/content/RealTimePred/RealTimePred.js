@@ -62,6 +62,7 @@ const RealTimePredict = () => {
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [predictedVal, setPredictedVal] = useState("");
+  const [hasError, setHasError] = useState(false);
 
 
   const intInputValidation = (val) => {
@@ -272,11 +273,29 @@ const RealTimePredict = () => {
     setLoading(true);
     setShowResults(true);
     const resp = await getPrediction(data);
+    hasErrorInResponse(resp);
     setPredictedVal(resp);
     setLoading(false);
   }
 
 
+
+  const hasErrorInResponse = (resp) => {
+    if (typeof resp === 'undefined' || 'errorMsg' in resp) {
+      setHasError(true);
+    }
+  }
+
+
+
+  if (hasError) {
+    return (
+      <div className='errorMsg'>
+        <h1>Oops... Something went wrong</h1>
+        <h4>Try refreshing the page or come back later</h4>
+      </div>
+    );
+  }
 
 
   return (

@@ -14,37 +14,21 @@ import {UserAnalytics, ChartRadar} from '@carbon/pictograms-react';
 
 const PlayerPredictions = () => {
 
-  const [tblHeaders, setTblHeaders] = useState([]);
   const [tblRows, setTblRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [profileMode, setProfileMode] = useState(false);
   const [playerName, setPlayerName] = useState("");
   const [radarData, setRadarData] = useState([]);
   const [lineData, setLineData] = useState([]);
-
-
-  const getRowHeaderNames = (data) => {
-
-    const headers = [];
-
-    const keys = Object.keys(data);
-    for (const key of keys) {
-      headers.push({
-        key: key,
-        header: key
-      });
-    }
-    return headers;
-  }
-
+  const [hasError, setHasError] = useState(false);
 
 
   const getAllPredictedData = async () => {
     setLoading(true);
     setProfileMode(false);
     const resp = await getPredictedStatsAll();
+    hasErrorInResponse(resp);
     setTblRows(resp);
-    setTblHeaders(getRowHeaderNames(resp[0]));
     setLoading(false);
   }
 
@@ -55,18 +39,36 @@ const PlayerPredictions = () => {
     const respRadar = await getRadarData(playerID);
     const respLine = await getLineData(playerID);
     const respPlayer = await getPlayerData(playerID);
+    hasErrorInResponse(respRadar);
+    hasErrorInResponse(respLine);
+    hasErrorInResponse(respPlayer);
     setPlayerName(respRadar[0]["player"]);
     setRadarData(respRadar);
     setLineData(respLine);
     setTblRows(respPlayer);
-    setTblHeaders(getRowHeaderNames(respPlayer[0]));
     setLoading(false);
   }
 
 
+  const hasErrorInResponse = (resp) => {
+    if (typeof resp === 'undefined' || 'errorMsg' in resp) {
+      setHasError(true);
+    }
+  }
+
   useEffect(() => {
     getAllPredictedData();
   }, []);
+
+
+  if (hasError) {
+    return (
+      <div className='errorMsg'>
+        <h1>Oops... Something went wrong</h1>
+        <h4>Try refreshing the page or come back later</h4>
+      </div>
+    );
+  }
 
 
   return (
@@ -99,7 +101,7 @@ const PlayerPredictions = () => {
               <div className='bx--col-lg-16'>
                 <MLBDataTable 
                   loading={loading}
-                  tblHeaders={tblHeaders}
+                  //tblHeaders={tblHeaders}
                   tblRows={tblRows}
                   profileMode={profileMode}
                   sendPlayerID={getPlayerProfileData}
@@ -149,7 +151,7 @@ const PlayerPredictions = () => {
               <div className='bx--col-lg-16'>
                 <MLBDataTable 
                   loading={loading}
-                  tblHeaders={tblHeaders}
+                  //tblHeaders={tblHeaders}
                   tblRows={tblRows}
                   profileMode={profileMode}
                   sendPlayerID={getPlayerProfileData}

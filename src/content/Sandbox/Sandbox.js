@@ -39,7 +39,7 @@ const ModelSandbox = () => {
   const [gammInvalid, setGammInvalid] = useState(false);
   const [regAlphaInvalid, setRegAlphaInvalid] = useState(false);
   const [regLambdaInvalid, setRegLambdaInvalid] = useState(false);
-
+  const [hasError, setHasError] = useState(false);
 
 
   const onNestChange = e => {
@@ -124,6 +124,7 @@ const ModelSandbox = () => {
 
     setProdLoading(true);
     const resp = await getProdModelInfo();
+    hasErrorInResponse(resp);
     setProdData(resp[0]);
     setProdLoading(false);
   }
@@ -136,15 +137,35 @@ const ModelSandbox = () => {
 
     setSandboxLoading(true);
     setShowSandboxResuts(true);
-    const resp = await getSandboxResults(nest, subsamp, maxDepth, learning, gamm, regAlpha,regLambda)
+    const resp = await getSandboxResults(nest, subsamp, maxDepth, learning, gamm, regAlpha,regLambda);
+    hasErrorInResponse(resp);
     setSandboxData(resp);
     setSandboxLoading(false);
   }
 
 
+  const hasErrorInResponse = (resp) => {
+    if (typeof resp === 'undefined' || 'errorMsg' in resp) {
+      setHasError(true);
+    }
+  }
+
+
+
   useEffect(() => {
     getProdModelData();
   }, []);
+
+
+
+  if (hasError) {
+    return (
+      <div className='errorMsg'>
+        <h1>Oops... Something went wrong</h1>
+        <h4>Try refreshing the page or come back later</h4>
+      </div>
+    );
+  }
 
 
   return (

@@ -10,17 +10,9 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-  TableSelectAll,
-  TableSelectRow,
-  Pagination,
   TableToolbar,
-  TableBatchAction,
-  TableBatchActions,
   TableToolbarContent,
   TableToolbarSearch,
-  TableToolbarAction,
-  TableToolbarMenu,
-  Button,
   OverflowMenu,
   OverflowMenuItem
 } from 'carbon-components-react';
@@ -30,12 +22,26 @@ import {
 const MLBDataTable = (props) => {
 
 
+  const getRowHeaderNames = (data) => {
+
+    const headers = [];
+    let keys = Object.keys(data);
+    for (const key of keys) {
+      headers.push({
+        key: key,
+        header: key
+      });
+    }
+    return headers;
+  }
+
+
   const viewPlayerProfile = (event) => {
     props.sendPlayerID(event.target.parentNode.id);
   }
 
 
-    if (typeof props.tblHeaders === 'undefined' || typeof props.tblRows === 'undefined' || props.loading === true)
+    if (typeof props.tblRows === 'undefined' || props.loading === true)
         return <DataTableSkeleton/>;
 
 
@@ -45,7 +51,7 @@ const MLBDataTable = (props) => {
             useZebraStyles={true}
             rows={props.tblRows}
             overflowMenuOnHover={true}
-            headers={props.tblHeaders} isSortable>
+            headers={getRowHeaderNames(props.tblRows[0])} isSortable>
 
               {({ rows, headers, getHeaderProps, getRowProps,
                 getTableProps, onInputChange, getToolbarProps }) => (

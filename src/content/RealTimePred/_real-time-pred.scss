@@ -14,3 +14,14 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
+
+.errorMsg {
+    @include carbon--type-style('productive-heading-04');
+    background-color: #161616;
+    color: #f4f4f4;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    margin-top: 20px;
+}
