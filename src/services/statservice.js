@@ -1,5 +1,5 @@
 //const ENDPOINT = "http://localhost:5001/api";
-const ENDPOINT = 'https://mlb-app.i8hi6t844mu.us-south.codeengine.appdomain.cloud/api';
+const ENDPOINT = 'http://3.144.91.7:5001/api';
 
 function handleErrors(resp) {
     if (!resp.ok) {

@@ -1,0 +1,7 @@
+applications:
+  - name: mlb-app
+memory: 256M
+path: build/
+buildpack: staticfile_buildpack 
+routes:
+  - route: mlb-app.us-south.cf.appdomain.cloud
