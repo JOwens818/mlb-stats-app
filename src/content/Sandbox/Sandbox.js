@@ -410,7 +410,7 @@ const ModelSandbox = () => {
                     <StructuredListCell head>Training Score</StructuredListCell>
                     <StructuredListCell head>Mean Cross Validation</StructuredListCell>
                     <StructuredListCell head>K-Fold Cross Validation</StructuredListCell>
-                    <StructuredListCell head>Mean Squered Error</StructuredListCell>
+                    <StructuredListCell head>Mean Squared Error</StructuredListCell>
                     <StructuredListCell head>R Squared</StructuredListCell>
                     <StructuredListCell head>Explained Variance</StructuredListCell>
                   </StructuredListRow>
